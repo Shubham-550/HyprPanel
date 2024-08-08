@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-outputDir="$HOME/Pictures/Screenshots/"
-outputFile="snapshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+outputDir="/media/data1/Pictures/screenshots/"
+outputFile="screenshot_$(date +%Y-%m-%d_%H:%M:%S).png"
 outputPath="$outputDir/$outputFile"
 mkdir -p "$outputDir"
 

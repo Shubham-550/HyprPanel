@@ -54,7 +54,7 @@ const options = mkOptions(OPTIONS, {
             }
         },
         osd: {
-            enable: opt(true),
+            enable: opt(false),
             orientation: opt<"horizontal" | "vertical">("vertical"),
             bar_container: opt(colors.crust),
             icon_container: opt(colors.lavender),
@@ -548,6 +548,25 @@ const options = mkOptions(OPTIONS, {
 
     bar: {
         layouts: opt({
+            "0": {
+                left: [
+                    "dashboard",
+                    "workspaces",
+                    "windowtitle"
+                ],
+                middle: [
+                    "media"
+                ],
+                right: [
+                    "volume",
+                    "network",
+                    "bluetooth",
+                    "battery",
+                    "systray",
+                    "clock",
+                    "notifications"
+                ]
+            },
             "1": {
                 left: [
                     "dashboard",
@@ -577,25 +596,6 @@ const options = mkOptions(OPTIONS, {
                     "clock",
                     "notifications"
                 ]
-            },
-            "0": {
-                left: [
-                    "dashboard",
-                    "workspaces",
-                    "windowtitle"
-                ],
-                middle: [
-                    "media"
-                ],
-                right: [
-                    "volume",
-                    "network",
-                    "bluetooth",
-                    "battery",
-                    "systray",
-                    "clock",
-                    "notifications"
-                ]
             }
         }),
         launcher: {
@@ -603,8 +603,8 @@ const options = mkOptions(OPTIONS, {
         },
         workspaces: {
             show_icons: opt(false),
-            show_numbered: opt(false),
-            numbered_active_indicator: opt<"underline" | "highlight">("underline"),
+            show_numbered: opt(true),
+            numbered_active_indicator: opt<"underline" | "highlight">("highlight"),
             icons: {
                 available: opt(""),
                 active: opt(""),
@@ -613,7 +613,7 @@ const options = mkOptions(OPTIONS, {
             workspaces: opt(10),
             spacing: opt(1),
             monitorSpecific: opt(true),
-            reverse_scroll: opt(false),
+            reverse_scroll: opt(true),
             scroll_speed: opt(5),
         },
         volume: {
@@ -622,10 +622,10 @@ const options = mkOptions(OPTIONS, {
         network: {
             truncation: opt(true),
             truncation_size: opt(7),
-            label: opt(true),
+            label: opt(false),
         },
         bluetooth: {
-            label: opt(true),
+            label: opt(false),
         },
         battery: {
             label: opt(true),
@@ -634,10 +634,12 @@ const options = mkOptions(OPTIONS, {
             ignore: opt([
                 "KDE Connect Indicator",
                 "spotify-client",
+                "blueman",
+                "nm-applet",
             ]),
         },
         clock: {
-            format: opt("󰃭  %a %b %d    %I:%M:%S %p"),
+            format: opt("󰃭  %a %d %b    %H:%M:%S"),
         },
         notifications: {
             show_total: opt(false)
@@ -663,23 +665,23 @@ const options = mkOptions(OPTIONS, {
                 left: {
                     shortcut1: {
                         icon: opt("󰇩"),
-                        tooltip: opt("Microsoft Edge"),
-                        command: opt("microsoft-edge-stable")
+                        tooltip: opt("Librewolf"),
+                        command: opt("librewolf")
                     },
                     shortcut2: {
                         icon: opt(""),
                         tooltip: opt("Spotify"),
-                        command: opt("spotify-launcher")
+                        command: opt("spotify")
                     },
                     shortcut3: {
                         icon: opt(""),
                         tooltip: opt("Discord"),
-                        command: opt("discord")
+                        command: opt("webcord")
                     },
                     shortcut4: {
                         icon: opt(""),
                         tooltip: opt("Search Apps"),
-                        command: opt("rofi -show drun")
+                        command: opt("rofi -show")
                     },
                 },
                 right: {
@@ -732,7 +734,7 @@ const options = mkOptions(OPTIONS, {
             },
             weather: {
                 interval: opt(60000),
-                unit: opt<"metric" | "imperial">("imperial"),
+                unit: opt<"metric" | "imperial">("metric"),
                 location: opt("Los Angeles"),
                 key: opt<string>(
                     JSON.parse(Utils.readFile(`${App.configDir}/.weather.json`) || "{}")?.weather_api_key || "",

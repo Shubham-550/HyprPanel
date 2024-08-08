@@ -1,5 +1,6 @@
 import Gdk from 'gi://Gdk?version=3.0';
 const network = await Service.import("network");
+const systemtray = await Service.import("systemtray");
 import options from "options";
 import { openMenu } from "../utils.js";
 
@@ -56,6 +57,14 @@ const Network = () => {
         props: {
             on_primary_click: (clicked: any, event: Gdk.Event) => {
                 openMenu(clicked, event, "networkmenu");
+            },
+            on_secondary_click: (_, event) => {
+                const nm_applet = systemtray.items.find((item) => item.id == "nm-applet");
+                if (nm_applet) {
+                    nm_applet.openMenu(event);
+                } else {
+                    Utils.execAsync("nm-connection-editor").catch(print);
+                }
             },
         },
     };

@@ -1,4 +1,5 @@
 const bluetooth = await Service.import('bluetooth')
+const systemtray = await Service.import("systemtray");
 import Gdk from 'gi://Gdk?version=3.0';
 import options from "options";
 import { openMenu } from "../utils.js";
@@ -39,6 +40,14 @@ const Bluetooth = () => {
             on_primary_click: (clicked: any, event: Gdk.Event) => {
                 openMenu(clicked, event, "bluetoothmenu");
             },
+            on_secondary_click: (_, event) => {
+                const blueman_applet = systemtray.items.find((item) => item.id == "blueman");
+                if (blueman_applet) {
+                    blueman_applet.openMenu(event);
+                } else {
+                    Utils.execAsync("blueman-manager").catch(print);
+                }
+            }
         },
     };
 

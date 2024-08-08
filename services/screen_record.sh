@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-outputDir="$HOME/Videos/Screencasts"
+outputDir="/media/data1/Videos/Screencasts"
 
 checkRecording() {
     if pgrep -f "gpu-screen-recorder" >/dev/null; then
@@ -18,7 +18,7 @@ startRecording() {
 
     target="$2"
 
-    outputFile="recording_$(date +%Y-%m-%d_%H-%M-%S).mkv"
+    outputFile="recording_$(date +%Y-%m-%d_%H:%M:%S).mkv"
     outputPath="$outputDir/$outputFile"
     mkdir -p "$outputDir"
 

@@ -91,8 +91,8 @@ const Media = () => {
         boxClass: "media",
         name: "media",
         props: {
-            on_scroll_up: () => mpris.getPlayer("")?.next(),
-            on_scroll_down: () => mpris.getPlayer("")?.previous(),
+            on_scroll_up: () => mpris.getPlayer("")?.previous(),
+            on_scroll_down: () => mpris.getPlayer("")?.next(),
             on_primary_click: (clicked: any, event: Gdk.Event) => {
                 openMenu(clicked, event, "mediamenu");
             },

@@ -53,6 +53,9 @@ const Volume = () => {
         isVisible: true,
         boxClass: "volume",
         props: {
+            on_scroll_up: () => (audio.speaker.volume += 0.01),
+            on_scroll_down: () => (audio.speaker.volume -= 0.01),
+            on_secondary_click: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
             on_primary_click: (clicked: any, event: Gdk.Event) => {
                 openMenu(clicked, event, "audiomenu");
             },

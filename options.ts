@@ -644,7 +644,7 @@ const options = mkOptions(OPTIONS, {
                 ]
             }
         }),
-        escape_to_close: opt(true),
+        escape_to_close: opt(false),
         launcher: {
             icon: opt("󰣇"),
         },

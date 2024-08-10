@@ -82,6 +82,7 @@ const Media = () => {
             on_primary_click: (clicked: any, event: Gdk.Event) => {
                 openMenu(clicked, event, "mediamenu");
             },
+            on_secondary_click: () => mpris.getPlayer("")?.playPause(),
         },
     };
 };

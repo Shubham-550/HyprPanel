@@ -5,6 +5,7 @@ const filterTitle = (windowtitle: ActiveClient) => {
     const windowTitleMap = [
         ["kitty", "󰄛", "Kitty Terminal"],
         ["firefox", "󰈹", "Firefox"],
+        ["librewolf", "󰈹", "Librewolf"],
         ["microsoft-edge", "󰇩", "Edge"],
         ["discord", "", "Discord"],
         ["org.kde.dolphin", "", "Dolphin"],

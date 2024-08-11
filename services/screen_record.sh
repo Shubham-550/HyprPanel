@@ -18,7 +18,7 @@ startRecording() {
 
     target="$2"
 
-    outputFile="recording_$(date +%Y-%m-%d_%H:%M:%S).mkv"
+    outputFile="recording_$(date +%Y-%m-%d_%H-%M-%S).mkv"
     outputPath="$outputDir/$outputFile"
     mkdir -p "$outputDir"
 

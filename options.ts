@@ -782,7 +782,7 @@ const options = mkOptions(OPTIONS, {
         },
         clock: {
             time: {
-                military: opt(false),
+                military: opt(true),
             },
             weather: {
                 interval: opt(60000),

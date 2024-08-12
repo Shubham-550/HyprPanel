@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Application } from "types/service/applications"
+import { NotificationAnchor } from "./types/options"
+import { OSDAnchor } from "lib/types/options";
 import icons, { substitutes } from "./icons"
 import Gtk from "gi://Gtk?version=3.0"
 import Gdk from "gi://Gdk"
@@ -52,8 +54,8 @@ export async function sh(cmd: string | string[]) {
 }
 
 export function forMonitors(widget: (monitor: number) => Gtk.Window) {
-    const n = Gdk.Display.get_default()?.get_n_monitors() || 1
-    return range(n, 0).flatMap(widget)
+    const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
+    return range(n, 0).flatMap(widget);
 }
 
 /**
@@ -144,4 +146,19 @@ export const Notify = (notifPayload: NotificationArgs): void => {
     if (notifPayload.id !== undefined) command += ` -r ${notifPayload.id}`;
 
     Utils.execAsync(command)
+}
+
+export function getPosition(pos: NotificationAnchor | OSDAnchor): ("top" | "bottom" | "left" | "right")[] {
+    const positionMap: { [key: string]: ("top" | "bottom" | "left" | "right")[] } = {
+        "top": ["top"],
+        "top right": ["top", "right"],
+        "top left": ["top", "left"],
+        "bottom": ["bottom"],
+        "bottom right": ["bottom", "right"],
+        "bottom left": ["bottom", "left"],
+        "right": ["right"],
+        "left": ["left"],
+    };
+
+    return positionMap[pos] || ["top"];
 }

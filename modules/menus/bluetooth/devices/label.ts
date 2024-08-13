@@ -13,11 +13,18 @@ const label = (bluetooth: Bluetooth) => {
         hpack: "fill",
         vpack: "start",
         children: [
-            Widget.Label({
-                class_name: "menu-label",
-                vpack: "center",
-                hpack: "start",
-                label: "Bluetooth",
+            Widget.Button({
+                on_primary_click: () => {
+                    Utils.execAsync("blueman-manager").catch((err) => {
+                        console.error("Failed to open Blueman Manager", err);
+                    });
+                },
+                child: Widget.Label({
+                    class_name: "menu-label",
+                    vpack: "center",
+                    hpack: "start",
+                    label: "Bluetooth",
+                }),
             }),
             Widget.Box({
                 class_name: "controls-container",

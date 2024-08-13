@@ -73,8 +73,18 @@ const devices = (bluetooth: Bluetooth, self: Box<any, any>) => {
                             hexpand: true,
                             class_name: `bluetooth-element-item ${device}`,
                             on_primary_click: () => {
-                                if (!conDevNames.includes(device.address))
-                                    device.setConnection(true);
+                                if (!device.connected) {
+                                    // Attempt to connect the device using a direct command
+                                    Utils.execAsync([
+                                        "bash",
+                                        "-c",
+                                        `bluetoothctl connect ${device.address}`,
+                                    ]).catch((err) => {
+                                        console.error(`Failed to connect to ${device.address}`, err);
+                                    });
+                                } else {
+                                    device.setConnection(false);
+                                }
                             },
                             child: Widget.Box({
                                 hexpand: true,
